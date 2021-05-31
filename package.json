@@ -1,0 +1,40 @@
+{
+  "name": "dag-app-utils",
+  "version": "0.0.1",
+  "description": "Utilities to work with a DAG app.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint test",
+    "lint:watch": "esw --watch",
+    "test": "mocha --require @babel/register --reporter spec",
+    "test:watch": "mocha --require @babel/register --watch --reporter spec",
+    "dev:watch": "concurrently -n lint,test 'npm run lint:watch' 'npm run test:watch'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsteinkamp/dag-app-utils.git"
+  },
+  "keywords": [
+    "dag",
+    "app"
+  ],
+  "author": "Zack Steinkamp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zsteinkamp/dag-app-utils/issues"
+  },
+  "homepage": "https://github.com/zsteinkamp/dag-app-utils#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/register": "^7.13.16",
+    "chai": "^4.3.4",
+    "concurrently": "^6.2.0",
+    "eslint": "^7.27.0",
+    "eslint-watch": "^7.0.0",
+    "mocha": "^8.4.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}

@@ -1,0 +1,6 @@
+version: '3'
+services:
+  dag-app-utils:
+    build: .
+    volumes:
+      - .:/usr/src/app
