@@ -1,11 +1,27 @@
 import { expect } from 'chai';
 import DagAppUtils from '..';
 
-describe('DagUtils', () => {
-  describe('sample', () => {
-    it('returns true', () => {
-      const du = new DagAppUtils({});
-      expect(du.meta).to.be.an('object');
+describe('DagAppUtils', () => {
+  describe('dau.dag', () => {
+    it('returns an object', () => {
+      const dau = new DagAppUtils({});
+      expect(dau.dag).to.be.an('object');
+    });
+    it('adds children', () => {
+      const dau = new DagAppUtils({
+        foo: {
+          type: 'input'
+        },
+        bar: {
+          type: 'calc',
+          parents: [ 'foo' ],
+          calc: (data) => {
+            return data['foo'] + 5;
+          }
+        }
+      });
+      expect(dau.dag).to.be.an('object');
+      console.log(dau.dag);
     });
   });
 });
