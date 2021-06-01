@@ -12,6 +12,7 @@ export default class DagAppUtils {
     this.dag = this.validateDag(cloneDeep(dag));
     this.prepareDag();
     this.seedDefaultValues();
+    this.calc();
   }
 
   validateDag(dag) {
@@ -103,6 +104,20 @@ export default class DagAppUtils {
     }
   }
 
+  updateValues(valuesToUpdate = {}) {
+    for (const key in valuesToUpdate) {
+      if (this.dag[key] === undefined) {
+        throw new Error(`Invalid key [${key}] provided in updateValues.`);
+      }
+      this.values[key] = valuesToUpdate[key];
+    }
+    const modifiedKeys = Object.keys(valuesToUpdate);
+    if (modifiedKeys.length > 0) {
+      this.calc(modifiedKeys);
+    }
+    return this.values;
+  }
+
   calc(modifiedKeys = []) {
     // if passed a string, make into an array
     if (typeof(modifiedKeys) === 'string') {
@@ -121,7 +136,7 @@ export default class DagAppUtils {
     else {
       // verify each key in modifiedKeys exists
       for (const key of modifiedKeys) {
-        if (!this.dag.meta[key]) {
+        if (!this.dag[key]) {
           throw new Error(`Unknown key [${key}] passed to calc().`);
         }
       }
